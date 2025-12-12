@@ -1,6 +1,9 @@
 // Human-readable file size formatter
 // Converts bytes to KB, MB, or GB using base 1024
 
+import clsx, {type ClassValue} from "clsx";
+import {twMerge} from "tailwind-merge";
+
 const trimTrailingZeros = (numStr: string) => numStr.replace(/\.0+$|(?<=\.[0-9]*?)0+$/g, "");
 
 const formatValue = (value: number) => {
@@ -15,6 +18,10 @@ const formatValue = (value: number) => {
  * - Values under 1 KB are shown as 0 KB (or 0 for non-positive/invalid input).
  * - Decimals are trimmed (e.g., 1.50 MB -> 1.5 MB, 12.0 MB -> 12 MB).
  */
+export function cn(...inputs: ClassValue[]){
+    return twMerge(clsx(inputs))
+}
+
 export function formatSize(bytes?: number | null): string {
   if (typeof bytes !== "number" || !isFinite(bytes) || bytes <= 0) {
     return "0 KB";
